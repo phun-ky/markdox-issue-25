@@ -15,6 +15,7 @@ module.exports = function(grunt) {
     clean : {
       remove_internal_modules_readme : [
         'source.md',
+        'README.md',
         'docs/inc/internal_modules_api.md'
       ]
     },
