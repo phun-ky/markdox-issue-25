@@ -1,0 +1,25 @@
+{
+  "name": "",
+  "version": "0.0.1",
+  "homepage": "asdsd.no",
+  "description": "",
+  "license:": "GPL",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/phun-ky/grunt-mustache"
+  },
+  "author": "Alexander Vassbotn Røyne-Helgesen",
+  "contributors": [
+    {
+      "name": "asdasd",
+      "email": "adasd@asdsad.com",
+      "url": "http://asdsad.net"
+    }
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "latest",
+    "grunt-cli": "latest",
+    "markdox": "~0.1.8"
+  }
+}

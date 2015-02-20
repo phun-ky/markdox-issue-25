@@ -1,0 +1,99 @@
+<? docfiles.forEach(function(doc) {  ?>
+
+  <!-- Start <?= doc.filename ?> -->
+
+  <? var _total = doc.javadoc.length; var _increment = 0; doc.javadoc.forEach(function(comment) {  ?>
+    <? if (!comment.ignore) { ?>
+      <? if (comment.name && _increment++ === 0) { ?>
+        <? if (comment.isMethod || comment.isFunction) { ?>
+          ## <?= comment.name ?>(<?= comment.paramStr ?>)
+        <? } else { ?>
+          ## <?= comment.name ?>
+        <? } ?>
+      <? } else{ ?>
+
+        <? if (comment.isMethod || comment.isFunction) { ?>
+          ### <?= comment.name ?>(<?= comment.paramStr ?>)
+        <? } else { ?>
+          ### <?= comment.name ?>
+        <? } ?>
+
+      <? } ?>
+
+        <?= comment.description ?>
+
+        <? if (comment.deprecated) { ?>
+          **Deprecated**
+        <? } ?>
+
+        <? if (comment.author) { ?>
+          Author: <?- comment.author ?>
+        <? } ?>
+
+        <? if (comment.version) { ?>
+          Version: <?= comment.version ?>
+        <? } ?>
+
+        <? if (comment.see) { ?>
+          See: <?= comment.see ?>
+        <? } ?>
+
+      <? if (comment.raw.tags) {   var _types = []; var _links = [];  ?>
+        <? comment.raw.tags.forEach(function(tag) {
+
+          if (tag.type === 'link') {
+
+            _links.push(tag);
+
+          }
+
+
+
+          if (tag.type === 'type') {
+
+            _types.push(tag);
+
+          }
+        })
+      } ?>
+
+      <? _types.forEach(function(tag) {  ?>
+        <? if(tag.types.length > 0 ) { ?>
+        Type : <? tag.types.forEach(function(type){
+
+
+
+        ?> `<?= type ?>`  <? }) ?>
+        Default : <? try{ if(comment.raw.ctx.value){ ?> `<?= comment.raw.ctx.value ?>` <? } }catch(e){} ?>
+        <? } ?>
+      <? }) ?>
+
+      <? _links.forEach(function(tag) {  ?>* Link : [<?= tag.string ?>](<?= tag.string ?>)
+        <? })
+
+
+        ?>
+
+      <? if (comment.paramTags.length > 0) { ?>
+        #### Params:
+        <? comment.paramTags.forEach(function(paramTag) {
+
+
+        ?>
+          * **<?= paramTag.joinedTypes ?>** *<?= paramTag.name ?>* <?= paramTag.description ?><? }) ?>
+      <? } ?>
+
+      <? if (comment.returnTags.length > 0) { ?>
+        #### Return:
+        <? comment.returnTags.forEach(function(returnTag) { ?>
+          * **<?= returnTag.joinedTypes ?>** <?= returnTag.description ?>
+        <? }) ?>
+      <? } ?>
+    <? } ?>
+  <? }) ?>
+
+____________
+
+  <!-- End <?= doc.filename ?> -->
+
+<? }) ?>
